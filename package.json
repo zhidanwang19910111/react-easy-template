@@ -1,0 +1,36 @@
+{
+  "name": "react-node-web",
+  "version": "1.0.0",
+  "description": "react-cli to build react project fast",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node ./client/build/dev-sever.js"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "cli"
+  ],
+  "author": "dan",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "chalk": "^4.0.0",
+    "express": "^4.17.1",
+    "html-webpack-plugin": "^4.2.0",
+    "react-dom": "^16.13.1",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-merge": "^4.2.2"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-router-dom": "^5.1.2"
+  }
+}
