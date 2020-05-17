@@ -1,6 +1,7 @@
 var express = require('express')
 var webpack = require('webpack')
 var webpackConfig = require('./webpack.dev.config')
+var path = require('path')
 
 webpackConfig.entry.unshift("webpack-hot-middleware/client?reload=true")
 var compiler = webpack( webpackConfig )
@@ -13,6 +14,10 @@ var devMiddleWare = require('webpack-dev-middleware')(compiler, {
 var hotMiddleware = require('webpack-hot-middleware')(compiler, {
   log: () => {}
 })
+
+// handle fallback for HTML5 history API
+app.use(require('connect-history-api-fallback')())
+
 app.use(devMiddleWare)
 app.use(hotMiddleware)
 

@@ -1,11 +1,18 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import App from '../page/App/index.jsx'
-console.log(App)
+import { BrowserRouter as Router, Route  } from 'react-router-dom'
+import RouterConfig from './config.js'
+import Main from '../page/main/index.jsx'
+import Login from '../page/login/index.jsx'
+
+
 const AppRouter = () => {
   return (
     <Router>
-      <App />
+      {
+        RouterConfig.map( (route, index) => {
+          return <Route key={index} exact path={route.path} component={route.component}></Route>
+        })
+      }
     </Router>
   )
 }
