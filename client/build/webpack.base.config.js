@@ -7,6 +7,11 @@ module.exports = {
     publicPath: '/',
     filename: '[name].js'
   },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, '../src')
+    }
+  },
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'app.css'
@@ -21,11 +26,12 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [ MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [ MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.less$/,
-        use: [ MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
+        use: [ MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader'],
+        include: [path.resolve(__dirname, '..', 'src')]
       }
     ]
   }
