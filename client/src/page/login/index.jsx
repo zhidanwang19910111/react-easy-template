@@ -2,9 +2,33 @@ import React from 'react'
 import './index.less'
 import { connect } from 'react-redux'
 import { Form, Input, Button } from 'antd'
+import axios from '@/lib/util/axios'
+import Api from './api/index'
 class Login extends React.Component{
   constructor(props) {
     super(props)
+    this.state = {
+      username: '',
+      password: ''
+    }
+  }
+  login() {
+    let { username, password } = this.state
+    let params = {
+      username,
+      password
+    }
+    // axios.post(Api.login, )
+  }
+  userNameChange( e ) {
+    this.setState({
+      username: e.target.value
+    })
+  }
+  passwordChange( e ) {
+    this.setState({
+      password: e.target.value
+    })
   }
   render() {
     return (
@@ -21,7 +45,7 @@ class Login extends React.Component{
                   message: '请输入账号'
                 }
               ]}>
-                <Input placeholder="请输入账号" />
+                <Input placeholder="请输入账号" onChange={this.userNameChange}/>
               </Form.Item>
               <Form.Item 
               name="password"
@@ -32,11 +56,11 @@ class Login extends React.Component{
                 }
               ]}
               >
-                <Input placeholder="请输入密码" type="password" />
+                <Input placeholder="请输入密码" type="password" onChange={this.passwordChange} />
               </Form.Item>
 
               <Form.Item className="login-btn">
-                <Button type="primary">登陆</Button>
+                <Button type="primary" onClick={this.login}>登陆</Button>
               </Form.Item>
             </Form>
           </div>

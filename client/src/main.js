@@ -7,6 +7,7 @@ import store from './redux/store'
 import '@/lib/style/reset.css'
 // 引入antd 样式
 import 'antd/dist/antd.css'
+
 ReactDOM.render(
   <Provider store={store}>
     <AppRouter />
