@@ -1,7 +1,8 @@
 {
-  "presets": ["env", "react"],
+  "presets": ["env", "es2017", "react"],
   "plugins": [
     "transform-runtime",
-    "transform-decorators-legacy"
+    "transform-decorators-legacy",
+    "transform-object-rest-spread"
   ]
 }

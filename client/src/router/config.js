@@ -8,18 +8,14 @@ const RouterConfig = [
     path: '/',
     component: Layout,
   },
-  /* {
-    path: '/center',
-    component: Layout,
-  },
   {
-    path: '/system',
-    component: Layout,
+    path: '/main',
+    component: Main,
   },
   {
     path: '/dashboard',
     component: Dashboard
-  }, */
+  },
   {
     path: '/login',
     component: Login

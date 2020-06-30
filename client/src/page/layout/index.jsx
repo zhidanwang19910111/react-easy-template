@@ -1,14 +1,16 @@
 import './index.less'
 import React from 'react'
-import { Menu } from 'antd'
+import { Menu, Button } from 'antd'
 import { connect } from 'react-redux'
+import login from '@/redux/actions/index.js'
+console.log( login )
 @connect(
   state => {
     return {
       name: state.login.nameEn
     }
   },
-  {}
+  login
 )
 class Layout extends React.Component{
   constructor( props ){
@@ -21,6 +23,9 @@ class Layout extends React.Component{
       ],
       current: 'log'
     }
+  }
+  changeName() {
+    this.props.changeName('yichunjing')
   }
   menuClick( e, item ) {
     this.setState({
@@ -51,6 +56,8 @@ class Layout extends React.Component{
             } )
           }
         </ul>
+        <Button onClick={ () => {this.changeName()} }>改变名字</Button>
+        <span>{this.props.name}</span>
       </div> 
     )
   }

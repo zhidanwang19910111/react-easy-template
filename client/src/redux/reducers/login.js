@@ -1,7 +1,10 @@
 const loginReducer = ( state = { nameEn: 'wangzhidan'}, action) => {
   switch ( action.type ) {
-    case "ADD_NAME":
-      return { nameEn: 'yichunjing' }
+    case "CHANGE_NAME":
+      return {
+        ...state,
+        nameEn: 'yichunjing' 
+      }
     default:
       return state
   }
