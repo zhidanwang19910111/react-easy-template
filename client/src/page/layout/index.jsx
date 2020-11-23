@@ -3,7 +3,6 @@ import React from 'react'
 import { Menu, Button } from 'antd'
 import { connect } from 'react-redux'
 import login from '@/redux/actions/index.js'
-console.log( login )
 @connect(
   state => {
     return {
