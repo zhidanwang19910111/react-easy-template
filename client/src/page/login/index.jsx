@@ -34,7 +34,7 @@ class Login extends React.Component{
     return (
       <div className="ig-login-wrap">
         <div className="ig-login-content">
-          <div className="title"> ITerGet OA </div>
+          <div className="title"> Easy API </div>
           <div className="login-input">
             <Form>
               <Form.Item 
