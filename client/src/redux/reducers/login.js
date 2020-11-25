@@ -1,9 +1,9 @@
-const loginReducer = ( state = { nameEn: 'wangzhidan'}, action) => {
+const loginReducer = ( state = { uesename: ''}, action) => {
   switch ( action.type ) {
-    case "CHANGE_NAME":
+    case "LOGIN":
       return {
         ...state,
-        nameEn: 'yichunjing' 
+        uesename: action.payload.username || ''
       }
     default:
       return state

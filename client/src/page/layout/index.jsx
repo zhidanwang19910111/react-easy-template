@@ -6,7 +6,7 @@ import login from '@/redux/actions/index.js'
 @connect(
   state => {
     return {
-      name: state.login.nameEn
+      name: state.login.username
     }
   },
   login
@@ -32,7 +32,6 @@ class Layout extends React.Component{
     })
   }
   componentWillMount() {
-    console.log(this.props)
     if ( false ) {
       // this.props.history.push('/login')
     }

@@ -1,9 +1,11 @@
 import React from 'react'
-import './index.less'
 import { connect } from 'react-redux'
-import { Form, Input, Button } from 'antd'
-import axios from '@/lib/util/axios'
-import Api from './api/index'
+import { Form, Input, Button, Icon, Tabs } from 'antd'
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import axios from '@/lib/util/axios.js'
+import Api from './api/index.js'
+import './index.less'
+const { TabPane } = Tabs;
 class Login extends React.Component{
   constructor(props) {
     super(props)
@@ -12,23 +14,19 @@ class Login extends React.Component{
       password: ''
     }
   }
-  login() {
-    let { username, password } = this.state
+  onFinish( e ) {
+    let { password, username } = e
     let params = {
-      username,
-      password
+      password,
+      username
     }
-    // axios.post(Api.login, )
-  }
-  userNameChange( e ) {
-    this.setState({
-      username: e.target.value
+    this.props.login(params)
+    .then( res => {
+      this.props.history.push('/')
     })
   }
-  passwordChange( e ) {
-    this.setState({
-      password: e.target.value
-    })
+  onRegister( e ) {
+
   }
   render() {
     return (
@@ -36,33 +34,92 @@ class Login extends React.Component{
         <div className="ig-login-content">
           <div className="title"> Easy API </div>
           <div className="login-input">
-            <Form>
-              <Form.Item 
-              name="username" 
-              rules={[
-                {
-                  required: true,
-                  message: '请输入账号'
-                }
-              ]}>
-                <Input placeholder="请输入账号" onChange={this.userNameChange}/>
-              </Form.Item>
-              <Form.Item 
-              name="password"
-              rules={[
-                {
-                  required: true,
-                  message: '请输入密码'
-                }
-              ]}
-              >
-                <Input placeholder="请输入密码" type="password" onChange={this.passwordChange} />
-              </Form.Item>
+            
+            <Tabs defaultActiveKey="1" tabBarStyle={{ border: 'none' }}> 
+              {/* 登陆 */}
+              <TabPane key="1" tab={ <span>登陆</span>}>
+                <Form size="large"
+                onFinish={this.onFinish.bind(this)}
+                >
+                  { /* 账号 */ } 
+                  <Form.Item 
+                  name="username" 
+                  prefix={ <UserOutlined /> }
+                  rules={[
+                    {
+                      required: true,
+                      message: '请输入账号',
+                    }
+                  ]}>
+                    <Input placeholder="请输入账号" prefix={ <UserOutlined /> } />
+                  </Form.Item>
+                  { /* 密码 */ }
+                  <Form.Item 
+                  name="password"
+                  rules={[
+                    {
+                      required: true,
+                      message: '请输入密码',
+                    }
+                  ]}
+                  >
+                    <Input placeholder="请输入密码" prefix={ <LockOutlined /> } type="password"/>
+                  </Form.Item>
+                  {/* 登陆操作 */}
+                  <Form.Item className="login-btn">
+                    <Button type="primary" htmlType="submit">登陆</Button>
+                  </Form.Item>
+                </Form>
+              </TabPane>
+              {/* 注册 */}
+              <TabPane key="2" tab={ <span>注册</span>}>
+                <Form size="large"
+                onFinish={this.onRegister.bind(this)}
+                >
+                  { /* 账号 */ } 
+                  <Form.Item 
+                  name="username" 
+                  prefix={ <UserOutlined /> }
+                  rules={[
+                    {
+                      required: true,
+                      message: '请输入账号',
+                    }
+                  ]}>
+                    <Input placeholder="请输入账号" prefix={ <UserOutlined /> } />
+                  </Form.Item>
+                  { /* 密码 */ }
+                  <Form.Item 
+                  name="password"
+                  rules={[
+                    {
+                      required: true,
+                      message: '请输入密码',
+                    }
+                  ]}
+                  >
+                    <Input placeholder="请输入密码" prefix={ <LockOutlined /> } type="password"/>
+                  </Form.Item>
+                  {/* 确认密码 */}
+                  <Form.Item 
+                  name="password"
+                  rules={[
+                    {
+                      required: true,
+                      message: '请确认密码',
+                    }
+                  ]}
+                  >
+                    <Input placeholder="请确认密码" prefix={ <LockOutlined /> } type="password"/>
+                  </Form.Item>
+                  {/* 登陆操作 */}
+                  <Form.Item className="login-btn">
+                    <Button type="primary" htmlType="submit">注册</Button>
+                  </Form.Item>
+                </Form>
+              </TabPane>
+            </Tabs>
 
-              <Form.Item className="login-btn">
-                <Button type="primary" onClick={this.login}>登陆</Button>
-              </Form.Item>
-            </Form>
           </div>
         </div>
       </div>
@@ -75,4 +132,17 @@ const mapStateToProps = (state, ownProps) => {
     name: state.nameEn
   }
 }
-export default connect()(Login)
+const mapDispatchToProps = ( dispatch ) => {
+  return {
+    login( payload ) {
+      return axios.post(Api.login, payload)
+      .then( res => {
+        if( res.success ) {
+          let action = { type: 'LOGIN', payload }
+          dispatch( action )
+        }
+      })
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

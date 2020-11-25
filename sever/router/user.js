@@ -1,6 +1,15 @@
 var express = require('express')
 var router = express.Router()
 var UserModel = require('../db/model/user')
+/**
+   * 用户注册接口
+   * @interface /api/user/register
+   * @method POST
+   * @param {String} username 名称，不能为空
+   * @param  {String} password 密码，不能为空
+   * @param  {String} confirmPassword 确认密码，不能为空
+   * @returns {Object}
+   */
 router.post('/register', function( req, res) {
   // post 获取req.body, get 获取req.query或者params
   // 判断用户名为空
@@ -67,6 +76,14 @@ router.get('/getUserList', function( req, res) {
     })
   } )
 })
+/**
+   * 用户登陆接口
+   * @interface /api/user/login
+   * @method POST
+   * @param {String} username 名称，不能为空
+   * @param  {String} password 密码，不能为空
+   * @returns {Object}
+   */
 router.post('/login', function(req, res) {
   let { username, password } = req.body
   if( !req || !username || !password ) {
@@ -79,7 +96,6 @@ router.post('/login', function(req, res) {
   }
   if( username && password ) {
     UserModel.findOne( username, function( err, document ) {
-      console.log(err)
       if( err ) {
         res.send({
           message: '登陆失败',
@@ -87,17 +103,27 @@ router.post('/login', function(req, res) {
           success: false
         })
       }else{
-        if( document.password != password ) {
-          res.send({
-            message: '用户名或密码不正确',
-            data: 0,
-            success: false
-          })
+        if( document ) {
+          if( document.password != password ) {
+            res.send({
+              message: '用户名或密码不正确',
+              data: 0,
+              success: false
+            })
+          }else{
+            res.send({
+              message: '登陆成功',
+              data: {
+                name: document.username
+              },
+              success: true,
+            })
+          }
         }else{
           res.send({
-            message: '登陆成功',
+            message: '请先注册',
             data: 1,
-            success: true
+            success: false
           })
         }
       }
