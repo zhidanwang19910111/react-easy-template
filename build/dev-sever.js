@@ -2,6 +2,7 @@ var express = require('express')
 var webpack = require('webpack')
 var webpackConfig = require('./webpack.dev.config')
 var path = require('path')
+var chalk = require('chalk')
 var { createProxyMiddleware } = require('http-proxy-middleware')
 
 var config = require('../config/index.js')
@@ -38,5 +39,5 @@ app.use(hotMiddleware)
 
 var port = config.dev.port
 var server = app.listen( port, () => {
-  console.log(`sever is running at localhost:${port}`)
+  console.log( chalk.green.underline(`client is running at localhost:${port}`) )
 } )

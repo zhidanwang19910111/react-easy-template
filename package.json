@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node ./client/build/dev-sever.js",
-    "build": "node ./client/build/webpack.prod.config.js"
+    "dev": "node ./build/dev-sever.js",
+    "build": "node ./build/webpack.prod.config.js"
   },
   "keywords": [
     "react",

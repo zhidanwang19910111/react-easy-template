@@ -8,7 +8,7 @@ module.exports = merge(baseWebpackConfig, {
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: './client/src/index.html',
+      template: './src/index.html',
       inject: true
     }),
     new webpack.HotModuleReplacementPlugin(),
